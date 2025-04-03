@@ -1,11 +1,20 @@
 <?php
 
+use App\Http\Controllers\Frontend\FrontHomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::group(['name' => 'front.','prefix' => 'front'],function (){
+
+    Route::get('/',[FrontHomeController::class,'index'])->name('index');
+});
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
