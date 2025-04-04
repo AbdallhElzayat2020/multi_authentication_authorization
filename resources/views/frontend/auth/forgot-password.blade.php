@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Forgot Password Basic - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Forgot Password</title>
 
     <meta name="description" content=""/>
 
@@ -114,22 +114,30 @@
                     </div>
                     <!-- /Logo -->
                     <h4 class="mb-2">Forgot Password? 🔒</h4>
-                    <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
-                    <form id="formAuthentication" class="mb-3" action="index.html">
+                    <!-- Session Status -->
+                    <x-auth-session-status class="mb-4" :status="session('status')"/>
+                    <form id="formAuthentication" class="mb-3" method="POST" action="{{ route('password.email') }}">
+                        @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input
                                 type="text"
                                 class="form-control"
                                 id="email"
+                                value="{{old('email')}}"
                                 name="email"
                                 placeholder="Enter your email"
                                 autofocus/>
+                            @error('email')
+                            <p class="text-danger">{{ $message }}</p>
+                            @enderror
                         </div>
+
+
                         <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
                     </form>
                     <div class="text-center">
-                        <a href="auth-login-basic.html" class="d-flex align-items-center justify-content-center">
+                        <a href="{{ route('login') }}" class="d-flex align-items-center justify-content-center">
                             <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
                             Back to login
                         </a>
@@ -142,15 +150,6 @@
 </div>
 
 <!-- / Content -->
-
-<div class="buy-now">
-    <a
-        href="https://themeselection.com/item/sneat-bootstrap-html-admin-template/"
-        target="_blank"
-        class="btn btn-danger btn-buy-now"
-    >Upgrade to Pro</a
-    >
-</div>
 
 <!-- Core JS -->
 <!-- build:js assets/vendor/js/core.js -->

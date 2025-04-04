@@ -13,7 +13,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"/>
 
-    <title>Register</title>
+    <title>Reset Password Page</title>
 
     <meta name="description" content=""/>
 
@@ -54,12 +54,12 @@
 <div class="container-xxl">
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner">
-            <!-- Register Card -->
+            <!-- Register -->
             <div class="card">
                 <div class="card-body">
                     <!-- Logo -->
                     <div class="app-brand justify-content-center">
-                        <a href="/" class="app-brand-link gap-2">
+                        <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
                     <svg
                         width="25"
@@ -109,35 +109,28 @@
                       </g>
                     </svg>
                   </span>
-                            <span class="app-brand-text demo text-body fw-bold">Front</span>
+                            <span class="app-brand-text demo text-body fw-bold">Front Reset Password</span>
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Register Front</h4>
+                    <h4 class="mb-2">Reset Password</h4>
+                    <p class="mb-4">Please sign-in to your account and start the adventure</p>
 
-                    <form class="mb-3" action="{{ route('register') }}" method="POST">
+                    <form id="formAuthentication" class="mb-3" action="{{ route('password.store') }}" method="post">
+                        <!-- Password Reset Token -->
+                        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
                         @csrf
                         <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
+                            <label for="email" class="form-label">Email or Username</label>
                             <input
                                 type="text"
                                 class="form-control"
-                                id="username"
-                                name="name"
-                                value="{{old('name')}}"
-                                placeholder="Enter your username"
+                                id="email"
+                                name="email"
+                                value="{{old('email',request()->email)}}"
+                                placeholder="Enter your Email"
                                 autofocus/>
-                            @error('name')
-                            <p class="text-danger">
-                                {{ $message }}
-                            </p>
-                            @enderror
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" value="{{old('email')}}" name="email" placeholder="Enter your email"/>
                             @error('email')
                             <p class="text-danger">
                                 {{ $message }}
@@ -146,14 +139,19 @@
                         </div>
 
                         <div class="mb-3 form-password-toggle">
-                            <label class="form-label" for="password">Password</label>
+                            <div class="d-flex  justify-content-between">
+                                <label class="form-label" for="password">Password</label>
+                                <a href="{{ route('password.request') }}">
+                                    <small>Forgot Password?</small>
+                                </a>
+                            </div>
                             <div class="input-group input-group-merge">
                                 <input
                                     type="password"
                                     id="password"
                                     class="form-control"
                                     name="password"
-                                    placeholder="password"
+                                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                     aria-describedby="password"/>
                                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                             </div>
@@ -183,19 +181,26 @@
                             @enderror
                         </div>
 
-
-                        <button class="btn btn-primary d-grid w-100">Sign up</button>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" name="remember" type="checkbox" id="remember-me"/>
+                                <label class="form-check-label" for="remember-me"> Remember Me </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button class="btn btn-primary d-grid w-100" type="submit">Login</button>
+                        </div>
                     </form>
 
                     <p class="text-center">
-                        <span>Already have an account?</span>
-                        <a href="{{ route('login') }}">
-                            <span>Sign in instead</span>
+                        <span>New on our platform?</span>
+                        <a href="{{ route('register') }}">
+                            <span>Create an account</span>
                         </a>
                     </p>
                 </div>
             </div>
-            <!-- Register Card -->
+            <!-- /Register -->
         </div>
     </div>
 </div>
