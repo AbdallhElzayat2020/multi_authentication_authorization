@@ -12,6 +12,7 @@ Route::get('/', function () {
 Route::group(['name' => 'front.','prefix' => 'front'],function (){
 
     Route::get('/',[FrontHomeController::class,'index'])->name('index');
+    Route::get('/login',[FrontHomeController::class,'login'])->name('login');
 });
 
 
