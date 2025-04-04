@@ -16,4 +16,10 @@ class FrontHomeController extends Controller
     {
         return view('frontend.auth.login');
     }
+
+    public function forgotPassword(Request $request)
+    {
+        return view('frontend.auth.forgot-password');
+    }
+
 }
