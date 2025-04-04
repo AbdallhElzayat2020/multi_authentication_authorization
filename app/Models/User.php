@@ -12,6 +12,12 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+//    public function sendPasswordResetNotification($token)
+//    {
+//        $this->notify(new \App\Notifications\UpdatedEmailNotification($token));
+//    }
+
+
     /**
      * The attributes that are mass assignable.
      *
