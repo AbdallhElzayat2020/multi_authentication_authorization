@@ -9,15 +9,20 @@ Route::get('/', function () {
 });
 
 
-Route::group(['name' => 'front.','prefix' => 'front'],function (){
+Route::group(['name' => 'front.', 'prefix' => 'front', 'middleware' => 'auth:web'], function () {
 
-    Route::get('/',[FrontHomeController::class,'index'])->name('index');
+    Route::get('/', [FrontHomeController::class, 'index'])->name('dashboard');
+
+});
+Route::group(['name' => 'front.', 'prefix' => 'front'], function () {
 
     Route::view('login','frontend.auth.login')->name('login');
     Route::view('register','frontend.auth.register')->name('register');
     Route::view('forgot-password','frontend.auth.forgot-password')->name('forgot-password');
 
 });
+
+
 
 
 
@@ -31,4 +36,4 @@ Route::group(['name' => 'front.','prefix' => 'front'],function (){
 //    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 //});
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
