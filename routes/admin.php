@@ -4,17 +4,13 @@ use App\Http\Controllers\Frontend\FrontHomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
-
-Route::group(['as' => 'front.', 'prefix' => 'front', 'middleware' => ['auth:web', 'verified']], function () {
+Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth:admin', 'verified']], function () {
 
     Route::get('/', [FrontHomeController::class, 'index'])->name('dashboard');
 
 });
-Route::group(['name' => 'front.', 'prefix' => 'front'], function () {
+Route::group(['name' => 'admin.', 'prefix' => 'admin'], function () {
 
     Route::view('login', 'frontend.auth.login')->name('login');
     Route::view('register', 'frontend.auth.register')->name('register');
@@ -33,5 +29,3 @@ Route::group(['name' => 'front.', 'prefix' => 'front'], function () {
 //    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 //});
 
-require __DIR__ . '/auth.php';
-require __DIR__ . '/admin.php';
