@@ -9,21 +9,18 @@ Route::get('/', function () {
 });
 
 
-Route::group(['name' => 'front.', 'prefix' => 'front', 'middleware' => 'auth:web'], function () {
+Route::group(['as' => 'front.', 'prefix' => 'front', 'middleware' => ['auth:web', 'verified']], function () {
 
     Route::get('/', [FrontHomeController::class, 'index'])->name('dashboard');
 
 });
 Route::group(['name' => 'front.', 'prefix' => 'front'], function () {
 
-    Route::view('login','frontend.auth.login')->name('login');
-    Route::view('register','frontend.auth.register')->name('register');
-    Route::view('forgot-password','frontend.auth.forgot-password')->name('forgot-password');
+    Route::view('login', 'frontend.auth.login')->name('login');
+    Route::view('register', 'frontend.auth.register')->name('register');
+    Route::view('forgot-password', 'frontend.auth.forgot-password')->name('forgot-password');
 
 });
-
-
-
 
 
 //Route::get('/dashboard', function () {
